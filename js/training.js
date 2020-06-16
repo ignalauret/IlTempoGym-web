@@ -1,11 +1,3 @@
-const getCurrentTraining = () => {
-  var currentPath = window.location.pathname;
-  var splittedPath = currentPath.split("/");
-  var currentTraining = splittedPath[splittedPath.length - 1].split(".")[0];
-  return currentTraining;
-}
-
-
 const updateTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
@@ -150,4 +142,4 @@ $('#' + getCurrentTraining() + '_button').click(function() {
   } else {
     updateTraining(token);
   }
-})
+});
