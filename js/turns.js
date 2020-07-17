@@ -54,18 +54,19 @@ const getTurns = (token) => {
     if(data == null) return;
     var dataSet = [];
     dataArray = Object.values(data);
-    for(var turno of dataArray) {
-      if(turno.clase == dbName || dbName == "All"){
-        dataSet.push([turno.nombre, turno.dni, turno.clase, turno.dia, turno.hora, turno.fecha]);
+    idArray = Object.keys(data);
+    for(var i = 0; i < dataArray.length; i++) {
+      if(dataArray[i].clase == dbName || dbName == "All"){
+        dataSet.push([idArray[i], dataArray[i].nombre, dataArray[i].dni, dataArray[i].clase, dataArray[i].hora, dataArray[i].fecha]);
       }
     }
     $('#' + currentTraining + '_today').DataTable( {
         data: dataSet,
         columns: [
+            { title: "ID" },
             { title: "Nombre" },
             { title: "Dni" },
             { title: "Clase" },
-            { title: "Dia" },
             { title: "Horario" },
             { title: "Fecha" }        ]
     } );
@@ -75,18 +76,24 @@ const getTurns = (token) => {
     if(data == null) return;
     var dataSet = [];
     dataArray = Object.values(data);
-    for(var turno of dataArray) {
-      if(turno.clase == dbName|| dbName == "All"){
-        dataSet.push([turno.nombre, turno.dni, turno.clase, turno.dia, turno.hora, turno.fecha]);
+    idArray = Object.keys(data);
+    for(var i = 0; i < dataArray.length; i++) {
+      if(dataArray[i].clase == dbName || dbName == "All"){
+        dataSet.push([idArray[i], dataArray[i].nombre, dataArray[i].dni, dataArray[i].clase, dataArray[i].hora, dataArray[i].fecha]);
       }
     }
+    // for(var turno of dataArray) {
+    //   if(turno.clase == dbName || dbName == "All"){
+    //     dataSet.push([turno.nombre, turno.dni, turno.clase, turno.dia, turno.hora, turno.fecha]);
+    //   }
+    // }
     $('#' + currentTraining + '_tomorrow').DataTable( {
         data: dataSet,
         columns: [
+            { title: "ID" },
             { title: "Nombre" },
             { title: "Dni" },
             { title: "Clase" },
-            { title: "Dia" },
             { title: "Horario" },
             { title: "Fecha" }        ]
     });
@@ -113,16 +120,10 @@ const clear_db = (token) => {
     idArray = Object.keys(data);
     for(var i = 0; i < dataArray.length; i++) {
       var fecha = dataArray[i].fecha;
-      console.log(fecha);
-      console.log(parsed_today);
       if(is_before(fecha, parsed_today)) {
-        console.log("Entro");
         $.ajax({
           url: 'https://il-tempo-dda8e.firebaseio.com/turnos/'+ idArray[i] +'.json?'+ authSufix,
           type: "DELETE",
-          success: function(result) {
-            console.log(result);
-          }
         });
       }
     }
@@ -163,5 +164,39 @@ $('#clear_button').click(function() {
             });
   } else {
     clear_db(token);
+  }
+});
+
+const addTurn = (token) => {
+  var authSufix = "auth=" + token;
+  var currentTraining = getCurrentTraining();
+  var capTraining = currentTraining[0].toUpperCase() + currentTraining.slice(1);
+  var name = $('#add_' + currentTraining + '_nombre').val();
+  var dni = $('#add_' + currentTraining + '_dni').val();
+  var fecha = $('#add_' + currentTraining + '_fecha').val();
+  var horario = $('#add_' + currentTraining + '_horario').val();
+  $.ajax({
+    url: 'https://il-tempo-dda8e.firebaseio.com/turnos.json?'+ authSufix,
+    type: "POST",
+    data: '{"clase":"' + capTraining + '", "dni": "'+ dni + '", "fecha": "' + fecha +'", "hora": "' + horario + '", "nombre": "' + name + '"}'
+  });
+
+}
+
+$('#add_button').click(function() {
+  var token = getCookie("token");
+  if(token == "") {
+    var loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo";
+    var response = $.post(loginUrl, {
+              "email": "test@iltempo.com",
+              "password": "contraseña123",
+              "returnSecureToken": true,
+            },function(data, status, jqXHR) {
+              token = data["idToken"];
+              setCookie("token", token, data["expiresIn"]);
+              addTurn(token);
+            });
+  } else {
+    addTurn(token);
   }
 });

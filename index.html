@@ -18,30 +18,36 @@
   </head>
   <body>
     <div class="header">
-	     <div class="container">
-	        <div class="row">
-	           <div class="col-md-5">
-	              <!-- Logo -->
-	              <div class="logo">
-	                 <h1><a href="index.html"><img src="images/logo_il_tempo.png" height="70px"/></a></h1>
-	              </div>
-	           </div>
-	           <div class="col-md-5 search_bar">
-	              <div class="row">
-	                <div class="col-lg-12">
-	                  <div class="input-group form">
-	                       <input type="text" class="form-control" placeholder="Search...">
-	                       <span class="input-group-btn">
-	                         <button class="btn btn-primary" type="button">Search</button>
-	                       </span>
-	                  </div>
-	                </div>
-	              </div>
-	           </div>
+       <div class="container">
+          <div class="row">
+             <div class="col-md-4">
+                <!-- Logo -->
+                <div class="logo">
+                   <h1><a href="index.html"><img src="images/logo_il_tempo.png" height="70px"/></a></h1>
+                </div>
+             </div>
+             <div class="col-md-5 search_bar">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="input-group form">
+                         <input type="text" class="form-control" placeholder="Search...">
+                         <span class="input-group-btn">
+                           <button class="btn btn-primary" type="button">Search</button>
+                         </span>
+                    </div>
+                  </div>
+                </div>
+             </div>
+             <div class="col-md-3 clear_button">
+                 <div class="btn btn-danger" id="clear_button">
+                   <i class="glyphicon glyphicon-trash"></i>
+                   Limpiar Base de Datos
+                 </div>
+             </div>
 
-	        </div>
-	     </div>
-	</div>
+          </div>
+       </div>
+  </div>
 
 
     <div class="page-content">
@@ -62,6 +68,11 @@
                             <li><a href="spinning.html">Spinning</a></li>
                             <li><a href="zumba.html">Zumba</a></li>
                         </ul>
+                    </li>
+                    <li class="">
+                         <a href="delete_turn.html">
+                            <i class="glyphicon glyphicon-plus"></i> Eliminar Turno
+                         </a>
                     </li>
                 </ul>
              </div>
