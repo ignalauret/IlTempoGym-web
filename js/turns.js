@@ -37,6 +37,7 @@ const getTurns = (token) => {
   // Get current training
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
+  if(dbName == "Funcional") dbName = "Funcional Local";
   // Get dates for query
   const date_today = new Date();
   var day_today = date_today.getDate();
@@ -171,6 +172,7 @@ const addTurn = (token) => {
   var authSufix = "auth=" + token;
   var currentTraining = getCurrentTraining();
   var capTraining = currentTraining[0].toUpperCase() + currentTraining.slice(1);
+  if(capTraining == "Funcional") capTraining = "Funcional Local";
   var name = $('#add_' + currentTraining + '_nombre').val();
   var dni = $('#add_' + currentTraining + '_dni').val();
   var fecha = $('#add_' + currentTraining + '_fecha').val();

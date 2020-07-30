@@ -1,6 +1,7 @@
 const updateTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
+  if(dbName == "Funcional") dbName = "Funcional Local";
   authSufix = "auth=" + token;
   schedule = ',"horario":{';
   var arr_days = [
@@ -18,7 +19,7 @@ const updateTraining = (token) => {
         var horarios = horario.split(" a ");
         var first = horarios[0].split(":");
         var second = horarios[1].split(":");
-        schedule += '"' + count + '":"4.' + (27+i) + '.' + first[0] + '.' + first[1] + 'a' + '4.27.' + second[0] + '.' + second[1] + '",';
+        schedule += '"' + count + '":"4.' + (27+i) + '.' + first[0] + '.' + first[1] + 'a' + '4.'+ (27+i) + '.' + second[0] + '.' + second[1] + '",';
         count++;
       } else {
         var arr = horario.split(":");
@@ -29,7 +30,7 @@ const updateTraining = (token) => {
   }
   schedule = schedule.substr(0,schedule.length-1);
   schedule += '}';
-  var patchData = '{"profesor":"' + $('#' + currentTraining + '_teacher').val() + '","duration":"' + $('#' + currentTraining + '_duration').val() + '","descripcion":"' + $('#' + currentTraining + '_description').val() + '","maxSchedules":' + $('#' + currentTraining + '_max').val() + schedule +'}';
+  var patchData = '{"intervalo":"' + $('#' + currentTraining + '_duration_mins').val() + '","profesor":"' + $('#' + currentTraining + '_teacher').val() + '","duration":"' + $('#' + currentTraining + '_duration').val() + '","descripcion":"' + $('#' + currentTraining + '_description').val() + '","maxSchedules":' + $('#' + currentTraining + '_max').val() + schedule +'}';
   // Musculación
   $.ajax({
     url: 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix,
@@ -42,13 +43,17 @@ const updateTraining = (token) => {
 const getTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
+  if(dbName == "Funcional") dbName = "Funcional Local";
   var authSufix = "auth=" + token;
   const url = 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix;
+  console.log(url);
   $.getJSON(url, function(data) {
     $('#' + currentTraining + '_teacher').val(data["profesor"]);
     $('#' + currentTraining + '_description').val(data["descripcion"]);
     $('#' + currentTraining + '_max').val(data["maxSchedules"]);
     $('#' + currentTraining + '_duration').val(data["duration"]);
+    $('#' + currentTraining + '_duration_mins').val(data["intervalo"]);
+
     var horarios_lunes = "";
     var horarios_martes = "";
     var horarios_miercoles = "";
