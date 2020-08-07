@@ -70,9 +70,14 @@
                             <li><a href="zumba.html">Zumba</a></li>
                         </ul>
                     </li>
-                    <li class="current">
+                    <li>
                          <a href="delete_turn.html">
                             <i class="glyphicon glyphicon-trash"></i> Eliminar Turno
+                         </a>
+                    </li>
+                    <li class="current">
+                         <a href="add_client.html">
+                            <i class="glyphicon glyphicon-plus"></i> Agregar usuario
                          </a>
                     </li>
                 </ul>
@@ -81,17 +86,21 @@
 		  <div class="col-md-10">
 		  	<div class="content-box-large">
     				<div class="panel-heading">
-  					<div class="panel-title"><h1>Eliminar Turno</h1></div>
+  					<div class="panel-title"><h1>Agregar Usuario</h1></div>
   				</div>
     				<div class="panel-body">
               <form action="">
                 <div class="form-group">
-                  <label>Id</label>
-                  <input class="form-control" id="delete_id" type="text">
+                  <label>Nombre completo (Ej: Sergio Sarudiansky)</label>
+                  <input class="form-control" id="add_name" type="text">
                 </div>
-                <div class="btn btn-danger" id="delete_button">
-                  <i class="glyphicon glyphicon-refresh"></i>
-                  Eliminar
+                <div class="form-group">
+                  <label>Dni (Ej: 23456865)</label>
+                  <input class="form-control" id="add_dni" type="text">
+                </div>
+                <div class="btn btn-primary" id="add_button">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  Agregar
                 </div>
               </div>
             </form>
@@ -114,6 +123,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="js/delete_turn.js"></script>
+    <script src="js/add_client.js"></script>
   </body>
 </html>

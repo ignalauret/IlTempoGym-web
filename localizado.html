@@ -85,23 +85,28 @@
               <input class="form-control" id="localizado_teacher" type="text">
             </div>
             <div class="form-group">
-              <label>Descripcion</label>
+              <label>Descripción (Items separados por puntos)</label>
               <textarea class="form-control" id="localizado_description" rows="3"></textarea>
             </div>
             <div class="form-group">
-              <label>Máximas personas por clase</label>
+              <label>Máximas personas por clase (Ej: 10)</label>
               <input class="form-control" id="localizado_max" type="text">
             </div>
             <div class="form-group">
-              <label>Duración de la clase</label>
+              <label>Duración de la clase (Ej: 45 minutos)</label>
               <input class="form-control" id="localizado_duration" type="text">
             </div>
             <div class="form-group">
-              <label>Cada cuantos minutos se hace un horario nuevo</label>
+              <label>Cada cuantos minutos se hace un horario nuevo (Ej: 45)</label>
               <input class="form-control" id="localizado_duration_mins" type="text">
             </div>
             <div>
               <h2>Horario</h2>
+            </div>
+            <div>
+              <h4>Ingrese las horas (Ej: 18:30) separadas por coma. Si quiere hacer horarios
+              de corrido, pongalos separados por "a" (Ej: 15:00 a 19:00) que solo funcionará si
+            el campo <label class="control-label">Cada cuantos minutos se hace un horario nuevo</label> está rellenado.</h4>
             </div>
             <div class="form-group">
               <label class="control-label col-md-2">Lunes</label>
@@ -165,7 +170,7 @@
             <input class="form-control" id="add_localizado_horario" type="text">
           </div>
           <div class="btn btn-primary" id="add_button">
-            <i class="glyphicon glyphicon-add"></i>
+            <i class="glyphicon glyphicon-plus"></i>
             Agregar
           </div>
         </div>

@@ -46,7 +46,6 @@ const getTraining = (token) => {
   if(dbName == "Funcional") dbName = "Funcional Local";
   var authSufix = "auth=" + token;
   const url = 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix;
-  console.log(url);
   $.getJSON(url, function(data) {
     $('#' + currentTraining + '_teacher').val(data["profesor"]);
     $('#' + currentTraining + '_description').val(data["descripcion"]);
