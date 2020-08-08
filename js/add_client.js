@@ -81,7 +81,14 @@ const deleteClient = (token, id) => {
   $.ajax({
     url: 'https://il-tempo-dda8e.firebaseio.com/usuarios/' + id + '.json?' + authSufix,
     type: "GET",
+    error: function(xhr, status, error) {
+      alert("Lo sentimos, hubo un error.");
+    },
     success: function(userData) {
+      if(userData == null) {
+        alert("Lo sentimos, el Id no existe.");
+        return;
+      }
       // Login user to get token
       var loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo";
       $.post(loginUrl, {
@@ -111,9 +118,6 @@ const deleteClient = (token, id) => {
                   }
                 });
               });
-    }
-    error: function(xhr, status, error) {
-      alert("Lo sentimos, hubo un error.")
     }
   });
 }
