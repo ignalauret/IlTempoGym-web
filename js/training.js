@@ -1,7 +1,7 @@
 const updateTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
-  if(dbName == "Funcional") dbName = "Funcional Local";
+  if(dbName == "Funcional") dbName = "Funcional Grupal";
   authSufix = "auth=" + token;
   schedule = ',"horario":{';
   var arr_days = [
@@ -19,11 +19,11 @@ const updateTraining = (token) => {
         var horarios = horario.split(" a ");
         var first = horarios[0].split(":");
         var second = horarios[1].split(":");
-        schedule += '"' + count + '":"4.' + (27+i) + '.' + first[0] + '.' + first[1] + 'a' + '4.'+ (27+i) + '.' + second[0] + '.' + second[1] + '",';
+        schedule += '"' + count + '":"4.' + (20+i) + '.' + first[0] + '.' + first[1] + 'a' + '4.'+ (20+i) + '.' + second[0] + '.' + second[1] + '",';
         count++;
       } else {
         var arr = horario.split(":");
-        schedule += '"' +count + '":"4.'  + (27+i) + '.' + arr[0] + '.' + arr[1] + '",';
+        schedule += '"' +count + '":"4.'  + (20+i) + '.' + arr[0] + '.' + arr[1] + '",';
         count++;
       }
     }
@@ -36,6 +36,12 @@ const updateTraining = (token) => {
     url: 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix,
     type: "PATCH",
     data: patchData,
+    success: function(data) {
+      alert("La información de la clase ha sido actualizada correctamente");
+    },
+    error: function(data) {
+      alert("Lo sentimos, hubo un error al actualizar la información");
+    }
   });
 }
 
@@ -43,7 +49,7 @@ const updateTraining = (token) => {
 const getTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
-  if(dbName == "Funcional") dbName = "Funcional Local";
+  if(dbName == "Funcional") dbName = "Funcional Grupal";
   var authSufix = "auth=" + token;
   const url = 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix;
   $.getJSON(url, function(data) {
@@ -64,19 +70,19 @@ const getTraining = (token) => {
         var first = horarios[0].split(".");
         var second = horarios[1].split(".");
         switch (first[1]) {
-          case "27":
+          case "20":
             horarios_lunes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
             break;
-          case "28":
+          case "21":
             horarios_martes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
             break;
-          case "29":
+          case "22":
             horarios_miercoles += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
             break;
-          case "30":
+          case "23":
             horarios_jueves += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
             break;
-          case "31":
+          case "24":
             horarios_viernes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
             break;
           default:
@@ -85,19 +91,19 @@ const getTraining = (token) => {
         var arr = horario.split(".");
         if(arr[3].length == 1) arr[3] += "0";
         switch (arr[1]) {
-          case "27":
+          case "20":
             horarios_lunes += (arr[2] + ":" + arr[3] + ",");
             break;
-          case "28":
+          case "21":
             horarios_martes += (arr[2] + ":" + arr[3] + ",");
             break;
-          case "29":
+          case "22":
             horarios_miercoles += (arr[2] + ":" + arr[3] + ",");
             break;
-          case "30":
+          case "23":
             horarios_jueves += (arr[2] + ":" + arr[3] + ",");
             break;
-          case "31":
+          case "24":
             horarios_viernes += (arr[2] + ":" + arr[3] + ",");
             break;
           default:

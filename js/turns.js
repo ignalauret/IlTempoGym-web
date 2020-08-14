@@ -37,7 +37,7 @@ const getTurns = (token) => {
   // Get current training
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
-  if(dbName == "Funcional") dbName = "Funcional Local";
+  if(dbName == "Funcional") dbName = "Funcional Grupal";
   // Get dates for query
   const date_today = new Date();
   var day_today = date_today.getDate();
@@ -172,7 +172,7 @@ const addTurn = (token) => {
   var authSufix = "auth=" + token;
   var currentTraining = getCurrentTraining();
   var capTraining = currentTraining[0].toUpperCase() + currentTraining.slice(1);
-  if(capTraining == "Funcional") capTraining = "Funcional Local";
+  if(capTraining == "Funcional") capTraining = "Funcional Grupal";
   var name = $('#add_' + currentTraining + '_nombre').val();
   var dni = $('#add_' + currentTraining + '_dni').val();
   var fecha = $('#add_' + currentTraining + '_fecha').val();
@@ -180,7 +180,13 @@ const addTurn = (token) => {
   $.ajax({
     url: 'https://il-tempo-dda8e.firebaseio.com/turnos.json?'+ authSufix,
     type: "POST",
-    data: '{"clase":"' + capTraining + '", "dni": "'+ dni + '", "fecha": "' + fecha +'", "hora": "' + horario + '", "nombre": "' + name + '"}'
+    data: '{"clase":"' + capTraining + '", "dni": "'+ dni + '", "fecha": "' + fecha +'", "hora": "' + horario + '", "nombre": "' + name + '"}',
+    success: function(data) {
+      alert("El turno ha sido creado correctamente");
+    },
+    error: function(data) {
+      alert("Lo sentimos, hubo un error al crear el turno");
+    }
   });
 
 }
