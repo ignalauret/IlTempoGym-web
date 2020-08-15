@@ -11,6 +11,9 @@ const updateTraining = (token) => {
     $('#' + currentTraining + '_jueves').val().split(","),
     $('#' + currentTraining + '_viernes').val().split(","),
   ];
+  if(currentTraining == "musculacion") {
+    arr_days.push($('#musculacion_sabado').val().split(","),);
+  }
   var count = 0;
   for(var i = 0; i < arr_days.length; i++) {
     for(var horario of arr_days[i]) {
@@ -30,7 +33,12 @@ const updateTraining = (token) => {
   }
   schedule = schedule.substr(0,schedule.length-1);
   schedule += '}';
-  var patchData = '{"intervalo":"' + $('#' + currentTraining + '_duration_mins').val() + '","profesor":"' + $('#' + currentTraining + '_teacher').val() + '","duration":"' + $('#' + currentTraining + '_duration').val() + '","descripcion":"' + $('#' + currentTraining + '_description').val() + '","maxSchedules":' + $('#' + currentTraining + '_max').val() + schedule +'}';
+  var patchData = '{"intervalo":"' + $('#' + currentTraining + '_duration_mins').val() + '","profesor":"' + $('#' + currentTraining + '_teacher').val() + '","duration":"' + $('#' + currentTraining + '_duration').val() + '","descripcion":"' + $('#' + currentTraining + '_description').val() + '","maxSchedules":' + $('#' + currentTraining + '_max').val() + schedule;
+  if(currentTraining == "musculacion") {
+    patchData += ',"freeGymMaxSchedules":' + $('#musculacion_free_max').val() + "}";
+  } else {
+    patchData += "}";
+  }
   // Musculación
   $.ajax({
     url: 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix,
@@ -59,11 +67,16 @@ const getTraining = (token) => {
     $('#' + currentTraining + '_duration').val(data["duration"]);
     $('#' + currentTraining + '_duration_mins').val(data["intervalo"]);
 
+    if(currentTraining == "musculacion") {
+      $('#musculacion_free_max').val(data["freeGymMaxSchedules"]);
+    }
+
     var horarios_lunes = "";
     var horarios_martes = "";
     var horarios_miercoles = "";
     var horarios_jueves = "";
     var horarios_viernes = "";
+    var horarios_sabados = "";
     for(var horario of data["horario"]) {
       if(horario.includes("a")) {
         var horarios = horario.split("a");
@@ -84,6 +97,9 @@ const getTraining = (token) => {
             break;
           case "24":
             horarios_viernes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+            break;
+          case "25":
+            horarios_sabados += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
             break;
           default:
         }
@@ -106,6 +122,9 @@ const getTraining = (token) => {
           case "24":
             horarios_viernes += (arr[2] + ":" + arr[3] + ",");
             break;
+          case "25":
+            horarios_sabados += (arr[2] + ":" + arr[3] + ",");
+            break;
           default:
         }
       }
@@ -115,6 +134,11 @@ const getTraining = (token) => {
     $('#' + currentTraining + '_miercoles').val(horarios_miercoles);
     $('#' + currentTraining + '_jueves').val(horarios_jueves);
     $('#' + currentTraining + '_viernes').val(horarios_viernes);
+    console.log(currentTraining);
+    if(currentTraining == "musculacion") {
+      console.log("Entro");
+      $('#musculacion_sabado').val(horarios_sabados);
+    }
 });
 }
 
