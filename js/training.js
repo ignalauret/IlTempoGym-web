@@ -2,6 +2,7 @@ const updateTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
   if(dbName == "Funcional") dbName = "Funcional Grupal";
+  if(dbName == "Musculacion") dbName = "Musculación";
   authSufix = "auth=" + token;
   schedule = ',"horario":{';
   var arr_days = [
@@ -58,6 +59,7 @@ const getTraining = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
   if(dbName == "Funcional") dbName = "Funcional Grupal";
+  if(dbName == "Musculacion") dbName = "Musculación";
   var authSufix = "auth=" + token;
   const url = 'https://il-tempo-dda8e.firebaseio.com/trainings/' + dbName + '.json?'+ authSufix;
   $.getJSON(url, function(data) {

@@ -38,6 +38,7 @@ const getTurns = (token) => {
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
   if(dbName == "Funcional") dbName = "Funcional Grupal";
+  if(dbName == "Musculacion") dbName = "Musculación";
   // Get dates for query
   const date_today = new Date();
   var day_today = date_today.getDate();
@@ -127,6 +128,7 @@ const clear_db = (token) => {
           type: "DELETE",
         });
       }
+      alert("Base de datos limpiada correctamente.");
     }
   });
 }

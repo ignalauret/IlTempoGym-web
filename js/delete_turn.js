@@ -1,10 +1,27 @@
 const deleteTurn = (token, id) => {
   // Build auth sufix with token
   var authSufix = "auth=" + token;
+  if(id == "") {
+    return;
+  }
   $.ajax({
     url: 'https://il-tempo-dda8e.firebaseio.com/turnos/'+ id +'.json?'+ authSufix,
-    type: "DELETE",
+    type: "GET",
+    success: function(data) {
+      if(data != null) {
+        $.ajax({
+          url: 'https://il-tempo-dda8e.firebaseio.com/turnos/'+ id +'.json?'+ authSufix,
+          type: "DELETE",
+          success: function(data) {
+            alert("El turno ha sido eliminado correctamente.");
+          },
+        });
+      } else {
+        alert("Lo sentimos el ID no existe.");
+      }
+    },
   });
+
 }
 
 const setCookie = (cname, cvalue, exseconds) => {

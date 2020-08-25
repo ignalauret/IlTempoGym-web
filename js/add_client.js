@@ -78,6 +78,9 @@ const deleteClient = (token, id) => {
   // Build auth sufix with token
   var authSufix = "auth=" + token;
   // Get user mail and password
+  if(id == "") {
+    return;
+  }
   $.ajax({
     url: 'https://il-tempo-dda8e.firebaseio.com/usuarios/' + id + '.json?' + authSufix,
     type: "GET",
