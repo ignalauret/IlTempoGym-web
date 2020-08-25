@@ -128,8 +128,8 @@ const clear_db = (token) => {
           type: "DELETE",
         });
       }
-      alert("Base de datos limpiada correctamente.");
     }
+    alert("Base de datos limpiada correctamente.");
   });
 }
 
@@ -175,6 +175,7 @@ const addTurn = (token) => {
   var currentTraining = getCurrentTraining();
   var capTraining = currentTraining[0].toUpperCase() + currentTraining.slice(1);
   if(capTraining == "Funcional") capTraining = "Funcional Grupal";
+  if(capTraining == "Musculacion") capTraining = "Musculación";
   var name = $('#add_' + currentTraining + '_nombre').val();
   var dni = $('#add_' + currentTraining + '_dni').val();
   var fecha = $('#add_' + currentTraining + '_fecha').val();

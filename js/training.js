@@ -136,9 +136,7 @@ const getTraining = (token) => {
     $('#' + currentTraining + '_miercoles').val(horarios_miercoles);
     $('#' + currentTraining + '_jueves').val(horarios_jueves);
     $('#' + currentTraining + '_viernes').val(horarios_viernes);
-    console.log(currentTraining);
     if(currentTraining == "musculacion") {
-      console.log("Entro");
       $('#musculacion_sabado').val(horarios_sabados);
     }
 });
