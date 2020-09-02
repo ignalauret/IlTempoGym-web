@@ -60,7 +60,7 @@ const getClients = (token) => {
     dataArray = Object.values(data);
     idArray = Object.keys(data);
     for(var i = 0; i < dataArray.length; i++) {
-      dataSet.push([idArray[i], dataArray[i].nombre, dataArray[i].dni]);
+      dataSet.push([idArray[i], dataArray[i].nombre, dataArray[i].dni, dataArray[i].psw]);
     }
 
     $('#users_table').DataTable( {
@@ -69,6 +69,7 @@ const getClients = (token) => {
             { title: "ID" },
             { title: "Nombre" },
             { title: "Dni" },
+            { title: "Contraseña" },
           ]
     });
   });
