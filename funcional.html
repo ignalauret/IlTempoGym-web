@@ -1,201 +1,208 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Il Tempo Administrador</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- styles -->
-    <link href="css/styles.css" rel="stylesheet">
 
-  </head>
-  <body>
-    <div class="header">
-	     <div class="container">
-	        <div class="row">
-	           <div class="col-md-4">
-	              <!-- Logo -->
-	              <div class="logo">
-	                 <h1><a href="index.html"><img src="images/logo_il_tempo.png" height="70px"/></a></h1>
-	              </div>
-	           </div>
-	           <div class="col-md-5 search_bar">
-	              <div class="row">
-	                <div class="col-lg-12">
-	                  <div class="input-group form">
-	                       <input type="text" class="form-control" placeholder="Search...">
-	                       <span class="input-group-btn">
-	                         <button class="btn btn-primary" type="button">Search</button>
-	                       </span>
-	                  </div>
-	                </div>
-	              </div>
-	           </div>
-             <div class="col-md-3 clear_button">
-                 <div class="btn btn-danger" id="clear_button">
-                   <i class="glyphicon glyphicon-trash"></i>
-                   Limpiar Base de Datos
-                 </div>
-	           </div>
+<head>
+  <title>Il Tempo Administrador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- styles -->
+  <link href="css/styles.css" rel="stylesheet">
 
-	        </div>
-	     </div>
-	</div>
+</head>
 
-    <div class="page-content">
-    	<div class="row">
-		  <div class="col-md-2">
-		  	<div class="sidebar content-box" style="display: block;">
-                <ul class="nav">
-
-                    <li class="submenu">
-                         <a href="#">
-                            <i class="glyphicon glyphicon-list"></i> Clases
-                            <span class="caret pull-right"></span>
-                         </a>
-                         <!-- Sub menu -->
-                         <ul>
-                           <li><a href="yoga.html">Yoga</a></li>
-                            <li class="current"><a href="funcional.html">Funcional Grupal</a></li>
-                            <li><a href="musculacion.html">Musculación</a></li>
-                            <li><a href="spinning.html">Spinning</a></li>
-                            <li><a href="zumba.html">Zumba</a></li>
-                            <li ><a href="localizada.html">Localizada</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                         <a href="delete_turn.html">
-                            <i class="glyphicon glyphicon-trash"></i> Eliminar Turno
-                         </a>
-                    </li>
-                    <li>
-                         <a href="add_client.html">
-                            <i class="glyphicon glyphicon-plus"></i> Agregar usuario
-                         </a>
-                    </li>
-                </ul>
-             </div>
-		  </div>
-		  <div class="col-md-10">
-
-
-
-		  	<div class="content-box-large">
-    				<div class="panel-heading">
-  					<div class="panel-title"><h1>Funcional Grupal</h1></div>
-
-    				<div class="panel-body">
-
-          <form action="">
-            <div class="form-group">
-              <label>Profesor</label>
-              <input class="form-control" id="funcional_teacher" type="text">
-            </div>
-            <div class="form-group">
-              <label>Descripción (Items separados por puntos)</label>
-              <textarea class="form-control" id="funcional_description" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Máximas personas por clase (Ej: 10)</label>
-              <input class="form-control" id="funcional_max" type="text">
-            </div>
-            <div class="form-group">
-              <label>Duración de la clase (Ej: 45 minutos)</label>
-              <input class="form-control" id="funcional_duration" type="text">
-            </div>
-            <div class="form-group">
-              <label>Cada cuantos minutos se hace un horario nuevo (Ej: 45)</label>
-              <input class="form-control" id="funcional_duration_mins" type="text">
-            </div>
-            <div>
-              <h2>Horario</h2>
-            </div>
-            <div>
-              <h4>Ingrese las horas (Ej: 18:30) separadas por coma. Si quiere hacer horarios
-              de corrido, pongalos separados por "a" (Ej: 15:00 a 19:00) que solo funcionará si
-            el campo <label class="control-label">Cada cuantos minutos se hace un horario nuevo</label> está rellenado.</h4>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Lunes</label>
-              <div class="col-md-10">
-                <input class="form-control" id="funcional_lunes" type="text">
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <!-- Logo -->
+          <div class="logo">
+            <h1><a href="index.html"><img src="images/logo_il_tempo.png" height="70px" /></a></h1>
+          </div>
+        </div>
+        <div class="col-md-5 search_bar">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="input-group form">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button">Search</button>
+                </span>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Martes</label>
-              <div class="col-md-10">
-                <input class="form-control" id="funcional_martes" type="text">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Miercoles</label>
-              <div class="col-md-10">
-                <input class="form-control" id="funcional_miercoles" type="text">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Jueves</label>
-              <div class="col-md-10">
-                <input class="form-control" id="funcional_jueves" type="text">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Viernes</label>
-              <div class="col-md-10">
-                <input class="form-control" id="funcional_viernes" type="text">
-              </div>
-            </div>
-          <div>
-            <div class="btn btn-primary" id="funcional_button">
-              <i class="glyphicon glyphicon-refresh"></i>
-              Actualizar
             </div>
           </div>
-        </form>
+        </div>
+        <div class="col-md-3 clear_button">
+          <div class="btn btn-danger" id="clear_button">
+            <i class="glyphicon glyphicon-trash"></i>
+            Limpiar Base de Datos
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="sidebar content-box" style="display: block;">
+          <ul class="nav">
+
+            <li class="submenu">
+              <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Clases
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="yoga.html">Yoga</a></li>
+                <li class="current"><a href="funcional.html">Funcional Grupal</a></li>
+                <li><a href="musculacion.html">Musculación</a></li>
+                <li><a href="spinning.html">Spinning</a></li>
+                <li><a href="zumba.html">Ritmos</a></li>
+                <li><a href="localizada.html">Localizada</a></li>
+              </ul>
+            </li>
+            <li class="">
+              <a href="delete_turn.html">
+                <i class="glyphicon glyphicon-trash"></i> Eliminar Turno
+              </a>
+            </li>
+            <li>
+              <a href="add_client.html">
+                <i class="glyphicon glyphicon-plus"></i> Agregar usuario
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-10">
+
+
+
+        <div class="content-box-large">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <h1>Funcional Grupal</h1>
+            </div>
+
+            <div class="panel-body">
+
+              <form action="">
+                <div class="form-group">
+                  <label>Profesor</label>
+                  <input class="form-control" id="funcional_teacher" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Descripción (Items separados por puntos)</label>
+                  <textarea class="form-control" id="funcional_description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Máximas personas por clase (Ej: 10)</label>
+                  <input class="form-control" id="funcional_max" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Duración de la clase (Ej: 45 minutos)</label>
+                  <input class="form-control" id="funcional_duration" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Cada cuantos minutos se hace un horario nuevo (Ej: 45)</label>
+                  <input class="form-control" id="funcional_duration_mins" type="text">
+                </div>
+                <div>
+                  <h2>Horario</h2>
+                </div>
+                <div>
+                  <h4>Ingrese las horas (Ej: 18:30) separadas por coma. Si quiere hacer horarios
+                    de corrido, pongalos separados por "a" (Ej: 15:00 a 19:00) que solo funcionará si
+                    el campo <label class="control-label">Cada cuantos minutos se hace un horario nuevo</label> está
+                    rellenado.</h4>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Lunes</label>
+                  <div class="col-md-10">
+                    <input class="form-control" id="funcional_lunes" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Martes</label>
+                  <div class="col-md-10">
+                    <input class="form-control" id="funcional_martes" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Miercoles</label>
+                  <div class="col-md-10">
+                    <input class="form-control" id="funcional_miercoles" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Jueves</label>
+                  <div class="col-md-10">
+                    <input class="form-control" id="funcional_jueves" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Viernes</label>
+                  <div class="col-md-10">
+                    <input class="form-control" id="funcional_viernes" type="text">
+                  </div>
+                </div>
+                <div>
+                  <div class="btn btn-primary" id="funcional_button">
+                    <i class="glyphicon glyphicon-refresh"></i>
+                    Actualizar
+                  </div>
+                </div>
+              </form>
 
               <h2>Turnos de hoy</h2>
-    					<table id="funcional_today" class="display" width="100%"></table>
-    			</div>
-          <div class="panel-body">
-            <h2>Todos los turnos</h2>
-            <table id="funcional_tomorrow" class="display" width="100%"></table>
+              <table id="funcional_today" class="display" width="100%"></table>
+            </div>
+            <div class="panel-body">
+              <h2>Todos los turnos</h2>
+              <table id="funcional_tomorrow" class="display" width="100%"></table>
+            </div>
+            <div>
+              <h2>Agregar turno</h2>
+            </div>
+            <div>
+              <div class="form-group">
+                <label>Nombre</label>
+                <input class="form-control" id="add_funcional_nombre" type="text">
+              </div>
+              <div class="form-group">
+                <label>DNI</label>
+                <input class="form-control" id="add_funcional_dni" type="text">
+              </div>
+              <div class="form-group">
+                <label>Fecha (Ej: 25/7 SIN EL CERO EL MES)</label>
+                <input class="form-control" id="add_funcional_fecha" type="text">
+              </div>
+              <div class="form-group">
+                <label>Horario</label>
+                <input class="form-control" id="add_funcional_horario" type="text">
+              </div>
+              <div class="btn btn-primary" id="add_button">
+                <i class="glyphicon glyphicon-plus"></i>
+                Agregar
+              </div>
+            </div>
+          </div>
         </div>
-        <div><h2>Agregar turno</h2></div>
-        <div>
-          <div class="form-group">
-            <label>Nombre</label>
-            <input class="form-control" id="add_funcional_nombre" type="text">
-          </div>
-          <div class="form-group">
-            <label>DNI</label>
-            <input class="form-control" id="add_funcional_dni" type="text">
-          </div>
-          <div class="form-group">
-            <label>Fecha (Ej: 25/7 SIN EL CERO EL MES)</label>
-            <input class="form-control" id="add_funcional_fecha" type="text">
-          </div>
-          <div class="form-group">
-            <label>Horario</label>
-            <input class="form-control" id="add_funcional_horario" type="text">
-          </div>
-          <div class="btn btn-primary" id="add_button">
-            <i class="glyphicon glyphicon-plus"></i>
-            Agregar
-          </div>
-        </div>
-		  	</div>
-		  </div>
-		</div>
+      </div>
     </div>
 
     <footer>
-         <div class="container">
-            <div class="copy text-center">
-               &copy; Copyright 2020, <a style="color: #FF0000" href="index.html">Il Tempo Fitness</a>.
-            </div>
-         </div>
-      </footer>
+      <div class="container">
+        <div class="copy text-center">
+          &copy; Copyright 2020, <a style="color: #FF0000" href="index.html">Il Tempo Fitness</a>.
+        </div>
+      </div>
+    </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -207,5 +214,6 @@
     <script src="js/custom.js"></script>
     <script src="js/turns.js"></script>
     <script src="js/training.js"></script>
-  </body>
+</body>
+
 </html>
