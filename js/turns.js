@@ -177,11 +177,6 @@ const clear_db = (token) => {
         $.ajax({
           url: 'https://il-tempo-dda8e.firebaseio.com/turnos/' + idArray[i] + '.json?' + authSufix,
           type: "DELETE",
-          success: function (data) {
-            if (i == dataArray.length - 1) {
-              alert("Se limpiaron" + count + " turnos viejos");
-            }
-          }
         });
       }
     }
