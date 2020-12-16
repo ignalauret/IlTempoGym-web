@@ -33,7 +33,7 @@ const updateTraining = (token) => {
       }
     }
   }
-  schedule = schedule.substr(0, schedule.length - 1);
+  if(schedule[schedule.length - 1] != "{") schedule = schedule.substr(0, schedule.length - 1);
   schedule += '}';
   var patchData = '{"intervalo":"' + $('#' + currentTraining + '_duration_mins').val() + '","profesor":"' + $('#' + currentTraining + '_teacher').val() + '","duration":"' + $('#' + currentTraining + '_duration').val() + '","descripcion":"' + $('#' + currentTraining + '_description').val() + '","maxSchedules":' + $('#' + currentTraining + '_max').val() + schedule;
   if (currentTraining == "musculacion") {
@@ -81,66 +81,69 @@ const getTraining = (token) => {
     var horarios_jueves = "";
     var horarios_viernes = "";
     var horarios_sabados = "";
-    for (var horario of data["horario"]) {
-      if (horario.includes("a")) {
-        var horarios = horario.split("a");
-        var first = horarios[0].split(".");
-        var second = horarios[1].split(".");
-        switch (first[1]) {
-          case "20":
-            horarios_lunes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
-            break;
-          case "21":
-            horarios_martes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
-            break;
-          case "22":
-            horarios_miercoles += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
-            break;
-          case "23":
-            horarios_jueves += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
-            break;
-          case "24":
-            horarios_viernes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
-            break;
-          case "25":
-            horarios_sabados += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
-            break;
-          default:
-        }
-      } else {
-        var arr = horario.split(".");
-        if (arr[3].length == 1) arr[3] += "0";
-        switch (arr[1]) {
-          case "20":
-            horarios_lunes += (arr[2] + ":" + arr[3] + ",");
-            break;
-          case "21":
-            horarios_martes += (arr[2] + ":" + arr[3] + ",");
-            break;
-          case "22":
-            horarios_miercoles += (arr[2] + ":" + arr[3] + ",");
-            break;
-          case "23":
-            horarios_jueves += (arr[2] + ":" + arr[3] + ",");
-            break;
-          case "24":
-            horarios_viernes += (arr[2] + ":" + arr[3] + ",");
-            break;
-          case "25":
-            horarios_sabados += (arr[2] + ":" + arr[3] + ",");
-            break;
-          default:
+    if(data["horario"] != null) {
+      for (var horario of data["horario"]) {
+        if (horario.includes("a")) {
+          var horarios = horario.split("a");
+          var first = horarios[0].split(".");
+          var second = horarios[1].split(".");
+          switch (first[1]) {
+            case "20":
+              horarios_lunes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+              break;
+            case "21":
+              horarios_martes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+              break;
+            case "22":
+              horarios_miercoles += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+              break;
+            case "23":
+              horarios_jueves += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+              break;
+            case "24":
+              horarios_viernes += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+              break;
+            case "25":
+              horarios_sabados += (first[2] + ":" + first[3] + " a " + second[2] + ":" + second[3] + ",");
+              break;
+            default:
+          }
+        } else {
+          var arr = horario.split(".");
+          if (arr[3].length == 1) arr[3] += "0";
+          switch (arr[1]) {
+            case "20":
+              horarios_lunes += (arr[2] + ":" + arr[3] + ",");
+              break;
+            case "21":
+              horarios_martes += (arr[2] + ":" + arr[3] + ",");
+              break;
+            case "22":
+              horarios_miercoles += (arr[2] + ":" + arr[3] + ",");
+              break;
+            case "23":
+              horarios_jueves += (arr[2] + ":" + arr[3] + ",");
+              break;
+            case "24":
+              horarios_viernes += (arr[2] + ":" + arr[3] + ",");
+              break;
+            case "25":
+              horarios_sabados += (arr[2] + ":" + arr[3] + ",");
+              break;
+            default:
+          }
         }
       }
+      $('#' + currentTraining + '_lunes').val(horarios_lunes);
+      $('#' + currentTraining + '_martes').val(horarios_martes);
+      $('#' + currentTraining + '_miercoles').val(horarios_miercoles);
+      $('#' + currentTraining + '_jueves').val(horarios_jueves);
+      $('#' + currentTraining + '_viernes').val(horarios_viernes);
+      if (currentTraining == "musculacion") {
+        $('#musculacion_sabado').val(horarios_sabados);
+      }
     }
-    $('#' + currentTraining + '_lunes').val(horarios_lunes);
-    $('#' + currentTraining + '_martes').val(horarios_martes);
-    $('#' + currentTraining + '_miercoles').val(horarios_miercoles);
-    $('#' + currentTraining + '_jueves').val(horarios_jueves);
-    $('#' + currentTraining + '_viernes').val(horarios_viernes);
-    if (currentTraining == "musculacion") {
-      $('#musculacion_sabado').val(horarios_sabados);
-    }
+  
   });
 }
 
