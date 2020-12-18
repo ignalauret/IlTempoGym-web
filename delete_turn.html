@@ -1,130 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Il Tempo Administrador</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- styles -->
-    <link href="css/styles.css" rel="stylesheet">
 
-  </head>
-  <body>
-    <div class="header">
-	     <div class="container">
-	        <div class="row">
-	           <div class="col-md-4">
-	              <!-- Logo -->
-	              <div class="logo">
-	                 <h1><a href="index.html"><img src="images/logo_il_tempo.png" height="70px"/></a></h1>
-	              </div>
-	           </div>
-	           <div class="col-md-5 search_bar">
-	              <div class="row">
-	                <div class="col-lg-12">
-	                  <div class="input-group form">
-	                       <input type="text" class="form-control" placeholder="Search...">
-	                       <span class="input-group-btn">
-	                         <button class="btn btn-primary" type="button">Search</button>
-	                       </span>
-	                  </div>
-	                </div>
-	              </div>
-	           </div>
-             <div class="col-md-3 clear_button">
-                 <div class="btn btn-danger" id="clear_button">
-                   <i class="glyphicon glyphicon-trash"></i>
-                   Limpiar Base de Datos
-                 </div>
-	           </div>
+<head>
+  <title>Il Tempo Administrador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- styles -->
+  <link href="css/styles.css" rel="stylesheet">
 
-	        </div>
-	     </div>
-	</div>
+</head>
 
-    <div class="page-content">
-    	<div class="row">
-		  <div class="col-md-2">
-		  	<div class="sidebar content-box" style="display: block;">
-                <ul class="nav">
-                    <!-- Main menu -->
-                    <!-- <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <!-- Logo -->
+          <div class="logo">
+            <h1><a href="index.html"><img src="images/logo_il_tempo.png" height="70px" /></a></h1>
+          </div>
+        </div>
+        <div class="col-md-5 search_bar">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="input-group form">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button">Search</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 clear_button">
+          <div class="btn btn-danger" id="clear_button">
+            <i class="glyphicon glyphicon-trash"></i>
+            Limpiar Base de Datos
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="sidebar content-box" style="display: block;">
+          <ul class="nav">
+            <!-- Main menu -->
+            <!-- <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Home</a></li>
                     <li><a href="calendar.html"><i class="glyphicon glyphicon-calendar"></i> Calendario</a></li>
                     <li><a href="stats.html"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>
                     <li><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
                     <li><a href="buttons.html"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
                     <li><a href="editors.html"><i class="glyphicon glyphicon-pencil"></i> Editors</a></li>
                     <li><a href="forms.html"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li> -->
-                    <li class="submenu">
-                         <a href="#">
-                            <i class="glyphicon glyphicon-list"></i> Clases
-                            <span class="caret pull-right"></span>
-                         </a>
-                         <!-- Sub menu -->
-                         <ul>
-                           <li><a href="yoga.html">Yoga</a></li>
-                           <li><a href="funcional.html">Funcional</a></li>
-                            <li ><a href="musculacion.html">Musculación</a></li>
-                            <li class="current"><a href="spinning.html">Spinning</a></li>
-                            <li><a href="zumba.html">Zumba</a></li>
-                            <li><a href="localizada.html">Localizada</a></li>
-                        </ul>
-                    </li>
-                    <li class="current">
-                         <a href="delete_turn.html">
-                            <i class="glyphicon glyphicon-trash"></i> Eliminar Turno
-                         </a>
-                    </li>
-                    <li>
-                         <a href="add_client.html">
-                            <i class="glyphicon glyphicon-user"></i> Usuarios
-                         </a>
-                    </li>
-                    <li class="">
-                         <a href="cuotas.html">
-                            <i class="glyphicon glyphicon-calendar"></i> Cuotas
-                         </a>
-                    </li>
-                </ul>
-             </div>
-		  </div>
-		  <div class="col-md-10">
-		  	<div class="content-box-large">
-    				<div class="panel-heading">
-  					<div class="panel-title"><h1>Eliminar Turno</h1></div>
-  				</div>
-    				<div class="panel-body">
-              <form action="">
-                <div class="form-group">
-                  <label>Id (Ej: -Xx8aJNYKmVYxD6Sdg4lx8rLlSrs)</label>
-                  <input class="form-control" id="delete_id" type="text">
-                </div>
-                <div class="btn btn-danger" id="delete_button">
-                  <i class="glyphicon glyphicon-refresh"></i>
-                  Eliminar
-                </div>
-              </div>
-            </form>
-    			</div>
-		  	</div>
-		  </div>
-		</div>
-    </div>
-
-    <footer>
-         <div class="container">
-            <div class="copy text-center">
-               &copy; Copyright 2020, <a style="color: #FF0000" href="index.html">Il Tempo Fitness</a>.
+            <li class="submenu">
+              <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Clases
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="yoga.html">Yoga</a></li>
+                <li><a href="funcional.html">Funcional</a></li>
+                <li><a href="musculacion.html">Musculación</a></li>
+                <li class="current"><a href="spinning.html">Spinning</a></li>
+                <li><a href="zumba.html">Zumba</a></li>
+                <li><a href="localizada.html">Localizada</a></li>
+              </ul>
+            </li>
+            <li class="current">
+              <a href="delete_turn.html">
+                <i class="glyphicon glyphicon-trash"></i> Eliminar Turno
+              </a>
+            </li>
+            <li>
+              <a href="add_client.html">
+                <i class="glyphicon glyphicon-user"></i> Usuarios
+              </a>
+            </li>
+            <li class="">
+              <a href="cuotas.html">
+                <i class="glyphicon glyphicon-calendar"></i> Cuotas
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div class="content-box-large">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <h1>Eliminar Turno</h1>
             </div>
-         </div>
-      </footer>
+          </div>
+          <div class="panel-body">
+            <form action="">
+              <div class="form-group">
+                <label>Id (Ej: -Xx8aJNYKmVYxD6Sdg4lx8rLlSrs)</label>
+                <input class="form-control" id="delete_id" type="text">
+              </div>
+              <div class="btn btn-danger" id="delete_button">
+                <i class="glyphicon glyphicon-refresh"></i>
+                Eliminar
+              </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/delete_turn.js"></script>
-  </body>
+  <footer>
+    <div class="container">
+      <div class="copy text-center">
+        &copy; Copyright 2020, <a style="color: #FF0000" href="index.html">Il Tempo Fitness</a>.
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/delete_turn.js"></script>
+  <script src="js/utils.js"></script>
+</body>
+
 </html>
