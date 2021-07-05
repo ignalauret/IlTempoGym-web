@@ -21,6 +21,24 @@ const getCookie = (cname) => {
     return "";
 }
 
+/* Auth token */
+const getToken = async () => {
+    var token = getCookie("token");
+    if (!token.length) {
+        var loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo";
+        await $.post(loginUrl, {
+            "email": "test@iltempo.com",
+            "password": "contraseña123",
+            "returnSecureToken": true,
+        }, function (data, status, jqXHR) {
+            token = data["idToken"];
+        });
+    }
+    return token;
+};
+
+/* Date methods */
+
 const getToday = () => {
     const date_today = new Date();
     var day_today = date_today.getDate();
@@ -50,6 +68,7 @@ const dateIsBefore = (date1, date2) => {
     return false;
 }
 
+/* Db methods */
 
 const getUserName = async (token, dni) => {
     if (!dni.length) return;

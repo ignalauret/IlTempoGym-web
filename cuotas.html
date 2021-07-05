@@ -104,6 +104,7 @@
                 <i class="glyphicon glyphicon-refresh"></i>
                 Cambiar
               </div>
+              <br><br>
               <div class="form-group">
                 <label>Desde fecha</label>
                 <input class="form-control" id="start_date" type="text">
@@ -143,10 +144,11 @@
                   Agregar
                 </div>
               </div>
+              <br><br>
             </div>
             <div class="panel-heading">
               <div class="panel-title">
-                <h1>Eliminar Turno</h1>
+                <h1>Eliminar Pago</h1>
               </div>
             </div>
             <div class="panel-body">
@@ -159,13 +161,42 @@
                   <i class="glyphicon glyphicon-refresh"></i>
                   Eliminar
                 </div>
+                <br><br>
             </div>
             </form>
+          </div>
+          <div class="panel-heading">
+            <div class="panel-title">
+              <h1>Editar Pago </h1>
+              <h4>Los campos que no se rellenen, no se editarán</h4>
+            </div>
+            <div class="panel-body">
+              <form action="">
+                <div class="form-group">
+                  <label>Id (REQUERIDO)</label>
+                  <input class="form-control" id="edit_id" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Fecha</label>
+                  <input class="form-control" id="edit_date" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Vencimiento</label>
+                  <input class="form-control" id="edit_expire" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Monto</label>
+                  <input class="form-control" id="edit_amount" type="text">
+                </div>
+                <div class="btn btn-primary" id="edit_cuota_button">
+                  <i class="glyphicon glyphicon-edit"></i>
+                  Editar
+                </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
   <footer>
     <div class="container">
