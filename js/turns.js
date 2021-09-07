@@ -9,8 +9,8 @@ const getCurrentTraining = () => {
 }
 
 const getTurns = (token) => {
-  // Build auth sufix with token
-  var authSufix = "auth=" + token;
+  // Build auth suffix with token
+  var authSuffix = "auth=" + token;
   // Get current training
   var currentTraining = getCurrentTraining();
   var dbName = currentTraining.charAt(0).toUpperCase() + currentTraining.slice(1);
@@ -30,7 +30,7 @@ const getTurns = (token) => {
   var tomorrow = day_tomorrow.toString() + "/" + month_tomorrow.toString();
 
   // Get todays turns.
-  $.getJSON('https://il-tempo-dda8e.firebaseio.com/turnos.json?orderBy="fecha"&equalTo="' + today + '"&' + authSufix, function (data) {
+  $.getJSON('https://il-tempo-dda8e.firebaseio.com/turnos.json?orderBy="fecha"&equalTo="' + today + '"&' + authSuffix, function (data) {
     if (data == null) return;
     var dataSet = [];
     dataArray = Object.values(data);
@@ -52,7 +52,7 @@ const getTurns = (token) => {
     });
   });
   // Get all turns.
-  $.getJSON('https://il-tempo-dda8e.firebaseio.com/turnos.json?' + authSufix, function (data) {
+  $.getJSON('https://il-tempo-dda8e.firebaseio.com/turnos.json?' + authSuffix, function (data) {
     if (data == null) return;
     var dataSet = [];
     dataArray = Object.values(data);
@@ -85,19 +85,18 @@ const is_before = (date1, date2) => {
 }
 
 const clear_db = (token) => {
-  var authSufix = "auth=" + token;
-  $.getJSON('https://il-tempo-dda8e.firebaseio.com/turnos.json?' + authSufix, function (data) {
+  var authSuffix = "auth=" + token;
+  $.getJSON('https://il-tempo-dda8e.firebaseio.com/turnos.json?' + authSuffix, function (data) {
     if (data == null) return;
-    var dataSet = [];
-    const today = new Date();
-    const parsed_today = today.getDate() + "/" + (today.getMonth() + 1);
-    dataArray = Object.values(data);
-    idArray = Object.keys(data);
+    const limitDate = new Date(new Date().setDate(new Date().getDate() - 5));
+    const parsed_limit_date = limitDate.getDate() + "/" + (limitDate.getMonth() + 1);
+    const dataArray = Object.values(data);
+    const idArray = Object.keys(data);
     for (var i = 0; i < dataArray.length; i++) {
-      var fecha = dataArray[i].fecha;
-      if (is_before(fecha, parsed_today)) {
+      var date = dataArray[i].fecha;
+      if (is_before(date, parsed_limit_date)) {
         $.ajax({
-          url: 'https://il-tempo-dda8e.firebaseio.com/turnos/' + idArray[i] + '.json?' + authSufix,
+          url: 'https://il-tempo-dda8e.firebaseio.com/turnos/' + idArray[i] + '.json?' + authSuffix,
           type: "DELETE",
         });
       }
