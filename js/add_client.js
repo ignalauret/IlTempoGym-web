@@ -1,6 +1,6 @@
 const addClient = (token, name, dni, telefono, contacto, direccion, obraSocial, nacimiento, password) => {
   // Build auth sufix with token
-  var authSufix = "auth=" + token;
+  var authSuffix = "auth=" + token;
   $.ajax({
     url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo",
     type: "POST",
@@ -24,7 +24,7 @@ const addClient = (token, name, dni, telefono, contacto, direccion, obraSocial, 
         //var patchData = '{"dni":"' + dni + '","nombre":"' + name + '","telefono":"' + telefono + '","contacto":"' + contacto + '","direccion":"' + direccion + '","obraSocial":"' + obraSocial + '","nacimiento":"' + nacimiento + '","psw":"' + password + '"}';
         // Musculación
         $.ajax({
-          url: 'https://il-tempo-dda8e.firebaseio.com/usuarios/' + uid + '.json?' + authSufix,
+          url: 'https://il-tempo-dda8e.firebaseio.com/usuarios/' + uid + '.json?' + authSuffix,
           type: "PATCH",
           data: patchData,
           success: function (data) {
