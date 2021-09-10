@@ -1,5 +1,5 @@
 const addClient = (token, name, dni, telefono, contacto, direccion, obraSocial, nacimiento, password) => {
-  // Build auth sufix with token
+  // Build auth suffix with token
   var authSuffix = "auth=" + token;
   $.ajax({
     url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo",
@@ -95,7 +95,7 @@ const getClients = (token) => {
       dataSet.push([idArray[i], dataArray[i].nombre, dataArray[i].dni, vencimiento, telefono, contacto, direccion, obraSocial, nacimiento, dataArray[i].psw]);
     }
 
-    $('#users_table').DataTable({
+    var table = $('#users_table').DataTable({
       data: dataSet,
       columns: [
         { title: "ID" },
@@ -108,10 +108,26 @@ const getClients = (token) => {
         { title: "Obra Social" },
         { title: "Nacimiento" },
         { title: "Contraseña" },
-      ]
+        { title: "Acciones" },
+      ],
+      columnDefs:
+        [
+
+          {
+            "data": null,
+            "defaultContent": "<button>Renovar</button>",
+            "targets": -1
+          }
+        ],
+    });
+    $('#users_table tbody').on('click', 'button', function () {
+      var data = table.row($(this).parents('tr')).data();
+      showRenewUserDialog(data[1], data[2]);
     });
   });
 }
+
+
 
 const deleteUserWithDni = (token, dni, psw) => {
   // Build auth sufix with token
@@ -203,7 +219,7 @@ $(document).ready(function () {
   var token = getCookie("token");
   if (token == "") {
     var loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo";
-    var response = $.post(loginUrl, {
+    $.post(loginUrl, {
       "email": "ignalau@iltempo.com",
       "password": "contraseña123",
       "returnSecureToken": true,
@@ -287,5 +303,75 @@ $('#edit_button').click(function () {
     });
   } else {
     editClient(token, uid, name, dni, telefono, contacto, direccion, obraSocial, nacimiento);
+  }
+});
+
+/* Payments */
+const showRenewUserDialog = (name, dni) => {
+  var renewDialog = document.getElementById('renew_dialog');
+  var nameText = document.getElementById('name_text');
+  $('#add_cuota_dni').val(dni);
+  $('#add_cuota_fecha').val(getToday());
+  $('#add_cuota_monto').val("0");
+  nameText.textContent = 'Cliente: ' + name;
+
+  renewDialog.showModal();
+}
+
+const addPayment = async (token) => {
+  var authSufix = "auth=" + token;
+  var dni = $('#add_cuota_dni').val();
+  var fecha = $('#add_cuota_fecha').val();
+  var vence = $('#add_cuota_vence').val();
+  var monto = $('#add_cuota_monto').val();
+  var name = await getUserName(token, dni);
+  var uid = await getUserId(token, dni);
+
+  if (name == null || uid == null) {
+    alert("Lo sentimos, ese DNI no está registrado");
+    return;
+  }
+  if (!monto.length) {
+    alert("Ingrese el monto porfavor");
+    return;
+  }
+  $.ajax({
+    url: 'https://il-tempo-dda8e.firebaseio.com/cuotas.json?' + authSufix,
+    type: "POST",
+    data: '{"vence":"' + vence + '", "dni": "' + dni + '", "fecha": "' + fecha + '", "nombre": "' + name + '", "monto": "' + monto + '"}',
+    success: function (data) {
+      $.ajax({
+        url: 'https://il-tempo-dda8e.firebaseio.com/usuarios/' + uid + '.json?' + authSufix,
+        type: "PATCH",
+        data: '{"vencimiento":"' + vence + '"}',
+        success: function (data) {
+          alert("El pago ha sido creado correctamente");
+        },
+        error: function (data) {
+          alert("Lo sentimos, hubo un error al crear el pago");
+        }
+      });
+    },
+    error: function (data) {
+      alert("Lo sentimos, hubo un error al crear el pago");
+    }
+  });
+};
+
+$('#add_cuota_button').click(function () {
+  var token = getCookie("token");
+  if (token == "") {
+    var loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo";
+    var response = $.post(loginUrl, {
+      "email": "test@iltempo.com",
+      "password": "contraseña123",
+      "returnSecureToken": true,
+    }, function (data, status, jqXHR) {
+      token = data["idToken"];
+      setCookie("token", token, data["expiresIn"]);
+      addPayment(token);
+    });
+  } else {
+    addPayment(token);
   }
 });
