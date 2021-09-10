@@ -314,7 +314,6 @@ const showRenewUserDialog = (name, dni) => {
   $('#add_cuota_fecha').val(getToday());
   $('#add_cuota_monto').val("0");
   nameText.textContent = 'Cliente: ' + name;
-
   renewDialog.showModal();
 }
 
@@ -362,7 +361,7 @@ $('#add_cuota_button').click(function () {
   var token = getCookie("token");
   if (token == "") {
     var loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMsEID7PGSNpM5EySROO3iA-eUhcO_KPo";
-    var response = $.post(loginUrl, {
+    $.post(loginUrl, {
       "email": "test@iltempo.com",
       "password": "contraseña123",
       "returnSecureToken": true,
@@ -374,4 +373,7 @@ $('#add_cuota_button').click(function () {
   } else {
     addPayment(token);
   }
+  // Hide the dialog
+  var renewDialog = document.getElementById('renew_dialog');
+  renewDialog.close();
 });
