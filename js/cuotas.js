@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('#start_date').val(getFirstDayOfMonth());
+  $('#start_date').val(getToday());
   $('#end_date').val(getToday());
   $('#add_cuota_fecha').val(getToday());
   $('#add_cuota_monto').val("0");
